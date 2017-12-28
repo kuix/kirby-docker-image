@@ -9,6 +9,8 @@ COPY apache.conf /etc/apache2/sites-enabled/000-default.conf
 
 ## Add PHP Core Extensions, like GD Library, iconv, MySQLI. Gettext
 RUN apt-get update && apt-get install -y \
+				software-properties-common \
+				git \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
         libmcrypt-dev \
@@ -18,9 +20,15 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install -j$(nproc) gd \
     && docker-php-ext-enable mysqli gettext
 
+## Add GIT LFS
+RUN curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash
+RUN apt-get install git-lfs
+
 ## Add mcrypt via PECL
 RUN pecl install mcrypt-1.0.1
 RUN docker-php-ext-enable mcrypt
+
+RUN rm -rf /var/lib/apt/lists/*
 
 ## Enable modrewrite and SSL module
 RUN a2enmod rewrite

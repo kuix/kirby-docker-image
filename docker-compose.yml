@@ -1,7 +1,7 @@
 version: '2'
 services:
     apache-php:
-        image: kuix/kirby
+        image: kuix/kirby:refact
         volumes:
             - ./:/var/www/html
         ports:
