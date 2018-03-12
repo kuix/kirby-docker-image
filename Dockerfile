@@ -11,6 +11,7 @@ COPY apache.conf /etc/apache2/sites-enabled/000-default.conf
 RUN apt-get update && apt-get install -y \
 				software-properties-common \
 				git \
+                locales \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
         libmcrypt-dev \
@@ -19,6 +20,10 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install -j$(nproc) gd \
     && docker-php-ext-enable mysqli gettext
+
+# Set locales
+RUN echo "hu_HU.UTF-8 UTF-8" >> /etc/locale.gen 
+RUN locale-gen
 
 ## Add GIT LFS
 RUN curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash
