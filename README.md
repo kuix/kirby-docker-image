@@ -1,6 +1,6 @@
 ## Docker Image for Kirby CMS
 
-The image based on the original `php:7.2-apache` image but added some extra apache module which necessary for run sendy. The following modifications added:
+The image based on the original `php:7.2-apache` image but added some extra apache module which necessary for run Kirby CMS. The following modifications added:
 
 * MySQL module added
 * Apache ModRewrite module enabled
@@ -10,7 +10,7 @@ The image based on the original `php:7.2-apache` image but added some extra apac
 
 Define your environment variables based on `.env.example` file. After that place a compose file with the following content. This compose file will start two container:
 
-* An Apache and PHP container to server sendy
+* An Apache and PHP container to server Kirby
 * A MySQL container optional
 
 ```
